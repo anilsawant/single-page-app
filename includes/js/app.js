@@ -34,7 +34,7 @@ window.addEventListener('hashchange', function() {
 // holds the various routes availabe in the app
 let appRoutes = {
   "": function() {
-    document.getElementById('genie-navbar').innerHTML = '';//clear the navbar in login page
+    document.getElementById('app-navbar').innerHTML = '';//clear the navbar in login page
     loadView({
       "html": "login.html",
       "css": "login.css",
@@ -94,7 +94,7 @@ let loadView = function(props) {
   let cssDir = 'includes/css/';
   let $overlay = $('#overlay');
   $overlay.fadeIn();
-  let container = document.getElementById('genie-view');
+  let container = document.getElementById('app-view');
   container.style.display = 'none';
   container.innerHTML = '';
   $.get(htmlDir + props.html, function(componentHtml) {
@@ -122,7 +122,7 @@ let loadNavbar = function(props, done) {
   let htmlDir = 'includes/html/';
   let cssDir = 'includes/css/';
   $.get(htmlDir + props.html, function(navbarHtml) {
-    let container = document.getElementById('genie-navbar');
+    let container = document.getElementById('app-navbar');
     container.style.display = 'none';
     container.innerHTML = navbarHtml;
     if (props.controller ){
