@@ -35,9 +35,9 @@ document.body.loginController = function() {
         "controller": "navbarController"
       }, function() {
         if( document.body.history && document.body.history.previousHash ){
-          window.location.href = '/' + document.body.history.previousHash;
+          window.location.hash = document.body.history.previousHash;
         }else {
-          window.location.href = '/#home';
+          window.location.hash = "#home";
         }
       });
     } else {

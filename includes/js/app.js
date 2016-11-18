@@ -1,10 +1,4 @@
 window.onload = function() {
-  //to fix hashchange event firing issue
-  if( window.location.href.endsWith('/#') ) {
-    window.location.href = '';
-  } else {
-    window.location.href = '/#';
-  }
   init();
 }
 
@@ -13,6 +7,7 @@ window.onload = function() {
 * It also maintains the history of hash traversals
 */
 window.addEventListener('hashchange', function() {
+  console.log("In hashchange ", window.location.hash);
   if( appRoutes[window.location.hash] ){
     if( !document.body.history )
       document.body.history = {};
@@ -21,7 +16,7 @@ window.addEventListener('hashchange', function() {
 
     if ( window.location.hash !== '' && !document.body.user ) {
       popupAlert('You are not authenticated. Kindly Login to continue.','Authentication Failure');
-      window.location.hash = '';
+      window.location.hash = '#login';
     }
     appRoutes[window.location.hash]();
     activateCorrespondingNavLink(window.location.hash);
@@ -34,6 +29,14 @@ window.addEventListener('hashchange', function() {
 // holds the various routes availabe in the app
 let appRoutes = {
   "": function() {
+    document.getElementById('app-navbar').innerHTML = '';//clear the navbar in login page
+    loadView({
+      "html": "login.html",
+      "css": "login.css",
+      "controller": "loginController"
+    });
+  },
+  "#login": function() {
     document.getElementById('app-navbar').innerHTML = '';//clear the navbar in login page
     loadView({
       "html": "login.html",
@@ -151,4 +154,10 @@ let activateCorrespondingNavLink = function(hash) {
 
 let init = function() {
   console.log('App Initialized.');
+  //to fix hashchange event firing issue
+  if( window.location.hash.includes('login') ) {
+    window.location.hash = '';
+  } else {
+    window.location.hash = '#login';
+  }
 }

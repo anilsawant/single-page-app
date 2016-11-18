@@ -12,5 +12,5 @@ let logout = function() {
   //reset global resources here
   document.body.user = undefined;
   document.body.history = undefined;
-  window.location.href = '/#';
+  window.location.hash = "#login";
 }
